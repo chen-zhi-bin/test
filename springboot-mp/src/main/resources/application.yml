@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.64.132:3306/mybatisplus?characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+mybatis-plus:
+  configuration:
+    # 日志打印 StdOutImpl标准输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 启动驼峰规则映射(实体类与数据库字段之间的映射关系)
+    map-underscore-to-camel-case: true
+  # 设置包别名(针对数据实体)
+  type-aliases-package: com.phase.three.pojo
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto  # 设置主键自增
+      logic-delete-field: deleted # 全局逻辑删除字段名
+      logic-delete-value: 1 # 逻辑已删除值
+      logic-not-delete-value: 0 # 逻辑未删除值
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.phase.three.controller
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
